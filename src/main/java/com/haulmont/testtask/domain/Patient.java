@@ -14,11 +14,13 @@ public class Patient {
     private String firstName;
     private String lastName;
     private String patronymic;
+    private String phone;
 
-    public Patient(String firstName, String lastName, String patronymic) {
+    public Patient(String firstName, String lastName, String patronymic, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
+        this.phone = phone;
     }
 
     public Patient() {
@@ -52,9 +54,17 @@ public class Patient {
         this.patronymic = patronymic;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public String toString() {
-        return firstName + " " + lastName + " " + patronymic;
+        return firstName + " " + lastName + " " + patronymic + " " + phone;
     }
 
     @Override
@@ -66,7 +76,8 @@ public class Patient {
 
         if (!Objects.equals(firstName, patient.firstName)) return false;
         if (!Objects.equals(lastName, patient.lastName)) return false;
-        return Objects.equals(patronymic, patient.patronymic);
+        if(!Objects.equals(patronymic, patient.patronymic)) return false;
+        return Objects.equals(phone, patient.phone);
     }
 
     @Override
@@ -74,6 +85,7 @@ public class Patient {
         int result = firstName != null ? firstName.hashCode() : 0;
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (patronymic != null ? patronymic.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
         return result;
     }
 }

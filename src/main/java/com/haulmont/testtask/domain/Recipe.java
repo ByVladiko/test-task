@@ -1,6 +1,7 @@
 package com.haulmont.testtask.domain;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -15,8 +16,8 @@ public class Recipe {
     private Patient patient;
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Doctor doctor;
-    private LocalDateTime dateOfCreation;
-    private LocalDateTime dateOfValidity;
+    private LocalDate dateOfCreation;
+    private LocalDate dateOfValidity;
     @Enumerated(value = EnumType.ORDINAL)
     private Priority priority;
 
@@ -24,11 +25,11 @@ public class Recipe {
         this.priority = Priority.Default;
     }
 
-    public Recipe(String description, Patient patient, Doctor doctor, LocalDateTime dateOfValidity, Priority priority) {
+    public Recipe(String description, Patient patient, Doctor doctor, LocalDate dateOfValidity, Priority priority) {
         this.description = description;
         this.patient = patient;
         this.doctor = doctor;
-        this.dateOfCreation = LocalDateTime.now();
+        this.dateOfCreation = LocalDate.now();
         this.dateOfValidity = dateOfValidity;
         this.priority = priority;
     }
@@ -61,19 +62,19 @@ public class Recipe {
         this.doctor = doctor;
     }
 
-    public LocalDateTime getDateOfCreation() {
+    public LocalDate getDateOfCreation() {
         return dateOfCreation;
     }
 
-    public void setDateOfCreation(LocalDateTime dateOfCreation) {
+    public void setDateOfCreation(LocalDate dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
 
-    public LocalDateTime getDateOfValidity() {
+    public LocalDate getDateOfValidity() {
         return dateOfValidity;
     }
 
-    public void setDateOfValidity(LocalDateTime dateOfValidity) {
+    public void setDateOfValidity(LocalDate dateOfValidity) {
         this.dateOfValidity = dateOfValidity;
     }
 

@@ -8,10 +8,9 @@ import com.haulmont.testtask.view.template.Navigation;
 import com.haulmont.testtask.view.template.crudview.CrudViewLayout;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.ui.*;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
 
 @Theme("valo")
 public class MainUI extends UI {
@@ -25,7 +24,7 @@ public class MainUI extends UI {
 
     private void setup() {
         setupContentLayout();
-        addHeader();
+        addNavigation();
         addContent();
     }
 
@@ -36,23 +35,14 @@ public class MainUI extends UI {
         setContent(content);
     }
 
-    private void addHeader() {
+    private void addNavigation() {
         Navigation navigation = new Navigation();
         content.addComponent(navigation);
     }
 
     private void addContent() {
         CrudRepository<Doctor> doctorRepository = new DoctorRepositoryImpl();
-        CrudViewLayout<Doctor> doctorLayout = new DoctorLayout(doctorRepository, createFields());
+        CrudViewLayout<Doctor> doctorLayout = new DoctorLayout(doctorRepository);
         content.addComponent(doctorLayout);
-    }
-
-    private Map<String, Field> createFields() {
-        Map<String, Field> fieldMap = new HashMap<>();
-        fieldMap.put("firstName", new TextField("Firstname"));
-        fieldMap.put("lastName", new TextField("Lastname"));
-        fieldMap.put("patronymic", new TextField("Patronymic"));
-        fieldMap.put("specialization", new TextField("Specialization"));
-        return fieldMap;
     }
 }
