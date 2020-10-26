@@ -1,4 +1,4 @@
-package com.haulmont.testtask.view.recipe;
+package com.haulmont.testtask.view.layout;
 
 import com.haulmont.testtask.domain.Doctor;
 import com.haulmont.testtask.domain.Patient;
@@ -18,9 +18,6 @@ import java.util.List;
 
 public class RecipeLayout extends CrudViewLayout<Recipe> {
 
-    private final DoctorRepository doctorRepository = new DoctorRepositoryImpl();
-    private final PatientRepository patientRepository = new PatientRepositoryImpl();
-
     public RecipeLayout(CrudRepository<Recipe> repository) {
         super(repository, new Recipe());
     }
@@ -33,11 +30,13 @@ public class RecipeLayout extends CrudViewLayout<Recipe> {
         binder.forField(description).asRequired().bind(Recipe::getDescription, Recipe::setDescription);
         components.add(description);
 
+        DoctorRepository doctorRepository = new DoctorRepositoryImpl();
         ComboBox<Doctor> doctor = new ComboBox<>("Doctor");
         doctor.setItems(doctorRepository.getAll());
         binder.forField(doctor).asRequired().bind(Recipe::getDoctor, Recipe::setDoctor);
         components.add(doctor);
 
+        PatientRepository patientRepository = new PatientRepositoryImpl();
         ComboBox<Patient> patient = new ComboBox<>("Patient");
         patient.setItems(patientRepository.getAll());
         binder.forField(patient).asRequired().bind(Recipe::getPatient, Recipe::setPatient);

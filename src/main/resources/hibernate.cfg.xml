@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
-        <property name="hibernate.connection.url">jdbc:hsqldb:mem:haulmont</property>
+        <property name="hibernate.connection.url">jdbc:hsqldb:file:./haulmont/db</property>
         <property name="hibernate.connection.username">sa</property>
         <property name="hibernate.connection.password">123</property>
         <property name="hibernate.connection.pool_size">1</property>
@@ -15,7 +15,7 @@
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
         <mapping class="com.haulmont.testtask.domain.Doctor"/>
-        <mapping class="com.haulmont.testtask.domain.Recipe"/>
         <mapping class="com.haulmont.testtask.domain.Patient"/>
+        <mapping class="com.haulmont.testtask.domain.Recipe"/>
     </session-factory>
 </hibernate-configuration>

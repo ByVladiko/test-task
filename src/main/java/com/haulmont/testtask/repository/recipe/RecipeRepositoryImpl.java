@@ -55,8 +55,9 @@ public class RecipeRepositoryImpl implements RecipeRepository {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         TypedQuery<Recipe> resultList = session.createQuery("SELECT a FROM Recipe a", Recipe.class);
+        List<Recipe> recipes = resultList.getResultList();
         session.getTransaction().commit();
         session.close();
-        return resultList.getResultList();
+        return recipes;
     }
 }

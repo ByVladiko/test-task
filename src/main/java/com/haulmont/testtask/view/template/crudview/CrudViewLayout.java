@@ -8,7 +8,9 @@ import com.vaadin.ui.themes.ValoTheme;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class CrudViewLayout<T> extends CustomComponent {
+public abstract class CrudViewLayout<T> {
+
+    private final VerticalLayout content = new VerticalLayout();
 
     protected CrudRepository<T> repository;
     protected CrudTable<T> table;
@@ -22,18 +24,15 @@ public abstract class CrudViewLayout<T> extends CustomComponent {
     }
 
     public abstract List<Component> createFieldsForForm(Binder<T> binder);
+
     public abstract void addColumnsToTable(Grid<T> grid);
 
     public void setup() {
-        VerticalLayout content = new VerticalLayout();
-
-        this.setSizeUndefined();
         table.setSizeFull();
 
-        content.addComponent(createCrudButtons());
+        HorizontalLayout crudButtons = createCrudButtons();
+        content.addComponent(crudButtons);
         content.addComponents(table);
-
-        this.setCompositionRoot(content);
     }
 
     public CrudRepository<T> getRepository() {
@@ -60,11 +59,15 @@ public abstract class CrudViewLayout<T> extends CustomComponent {
         this.form = form;
     }
 
+    public VerticalLayout getContent() {
+        return content;
+    }
+
     private HorizontalLayout createCrudButtons() {
         HorizontalLayout crudButtons = new HorizontalLayout();
 
         Button addButton = new Button("Add");
-        addButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
+        addButton.setStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         addButton.addClickListener(event -> {
             form.setCaption("Adding new entity");
             form.setActionType(CrudForm.ActionType.CREATE);
@@ -73,17 +76,22 @@ public abstract class CrudViewLayout<T> extends CustomComponent {
         });
         crudButtons.addComponent(addButton);
 
-//        Button edit = new Button("Edit");
-//        edit.setStyleName(ValoTheme.BUTTON_FRIENDLY);
-//        edit.setVisible(false);
-//        edit.addClickListener(event -> {
-//           form.setCaption("Editing entity");
-//           form.setActionType(CrudForm.ActionType.UPDATE);
-//           UI.getCurrent().addWindow(form);
-//        });
+        Button editButton = new Button("Edit");
+        editButton.setStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
+        editButton.addClickListener(event -> {
+                    Optional<T> selectedItem = table.getSelectionModel().getFirstSelectedItem();
+                    if (selectedItem.isPresent()) {
+                        form.setCaption("Editing entity");
+                        form.setEntity(selectedItem.get());
+                        form.setActionType(CrudForm.ActionType.UPDATE);
+                        UI.getCurrent().addWindow(form);
+                    }
+                }
+        );
+        crudButtons.addComponent(editButton);
 
         Button removeButton = new Button("Delete");
-        removeButton.setStyleName(ValoTheme.BUTTON_DANGER);
+        removeButton.setStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         removeButton.addClickListener(event -> {
             Optional<T> selectedItem = table.getSelectionModel().getFirstSelectedItem();
             if(selectedItem.isPresent()) {

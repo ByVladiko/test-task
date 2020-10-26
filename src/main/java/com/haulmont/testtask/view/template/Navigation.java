@@ -1,9 +1,8 @@
 package com.haulmont.testtask.view.template;
 
-import com.vaadin.server.ExternalResource;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Link;
 import com.vaadin.ui.themes.ValoTheme;
 
 import java.util.ArrayList;
@@ -19,10 +18,10 @@ public class Navigation extends CustomComponent {
     }
 
     private void addLinksForNavigation() {
-        List<Link> links = new ArrayList<>();
-        links.add(new Link("Doctors", new ExternalResource("http://localhost:8080//doctors")));
-        links.add(new Link("Patients", new ExternalResource("http://localhost:8080//patients")));
-        links.add(new Link("Recipes", new ExternalResource("http://localhost:8080//recipes")));
+        List<Button> links = new ArrayList<>();
+        links.add(new Button("Doctors"));
+        links.add(new Button("Patients"));
+        links.add(new Button("Recipes"));
         links.forEach(content::addComponent);
     }
 

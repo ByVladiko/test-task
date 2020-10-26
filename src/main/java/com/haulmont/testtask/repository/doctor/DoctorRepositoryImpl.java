@@ -5,7 +5,7 @@ import com.haulmont.testtask.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import javax.persistence.*;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class DoctorRepositoryImpl implements DoctorRepository {

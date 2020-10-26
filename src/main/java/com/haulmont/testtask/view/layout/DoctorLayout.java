@@ -1,4 +1,4 @@
-package com.haulmont.testtask.view.doctor;
+package com.haulmont.testtask.view.layout;
 
 import com.haulmont.testtask.domain.Doctor;
 import com.haulmont.testtask.repository.CrudRepository;

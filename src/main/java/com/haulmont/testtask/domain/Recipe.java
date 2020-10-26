@@ -6,15 +6,16 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
+@Table(name = "recipe")
 public class Recipe {
 
     @Id
     @GeneratedValue
     private Long id;
     private String description;
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne
     private Patient patient;
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne
     private Doctor doctor;
     private LocalDate dateOfCreation;
     private LocalDate dateOfValidity;

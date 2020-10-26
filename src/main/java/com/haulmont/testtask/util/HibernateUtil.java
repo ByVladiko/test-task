@@ -1,12 +1,21 @@
 package com.haulmont.testtask.util;
 
 import com.haulmont.testtask.domain.Doctor;
+import com.haulmont.testtask.domain.Patient;
+import com.haulmont.testtask.domain.Priority;
+import com.haulmont.testtask.domain.Recipe;
 import com.haulmont.testtask.repository.doctor.DoctorRepository;
 import com.haulmont.testtask.repository.doctor.DoctorRepositoryImpl;
+import com.haulmont.testtask.repository.patient.PatientRepository;
+import com.haulmont.testtask.repository.patient.PatientRepositoryImpl;
+import com.haulmont.testtask.repository.recipe.RecipeRepository;
+import com.haulmont.testtask.repository.recipe.RecipeRepositoryImpl;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+import java.time.LocalDate;
 
 public class HibernateUtil {
     private static SessionFactory sessionFactory;
@@ -19,9 +28,18 @@ public class HibernateUtil {
             sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 
             DoctorRepository doctorRepository = new DoctorRepositoryImpl();
-            doctorRepository.save(new Doctor("Nicolaus", "Fabiulos", "Serbian", "Traumatolog"));
+            Doctor doctor = new Doctor("Nicolaus", "Fabiulos", "Serbian", "Traumatolog");
+            doctorRepository.save(doctor);
             doctorRepository.save(new Doctor("Galileo", "Galilei", "Shelter", "Stomatolog"));
             doctorRepository.save(new Doctor("Johannes", "Kepler", "Tailer", "Pediator"));
+
+            PatientRepository patientRepository = new PatientRepositoryImpl();
+            Patient patient = new Patient("Krambi", "Kreker", "Sugarovich", "+79277209637");
+            patientRepository.save(patient);
+
+            RecipeRepository recipeRepository = new RecipeRepositoryImpl();
+            Recipe recipe = new Recipe("Dont forget about your soul", patient, doctor, LocalDate.of(2020, 3, 25), Priority.Default);
+            recipeRepository.save(recipe);
         }
         catch (Exception e) {
             StandardServiceRegistryBuilder.destroy(registry);

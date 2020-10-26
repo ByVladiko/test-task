@@ -3,20 +3,23 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="WebApp_ID" version="2.5">
     <display-name>Vaadin Web Application</display-name>
+
     <context-param>
         <description>Vaadin production mode</description>
         <param-name>productionMode</param-name>
         <param-value>false</param-value>
     </context-param>
+
     <servlet>
         <servlet-name>Main servlet</servlet-name>
         <servlet-class>com.vaadin.server.VaadinServlet</servlet-class>
         <init-param>
-            <description>DoctorUI</description>
+            <description>MainUI</description>
             <param-name>UI</param-name>
             <param-value>com.haulmont.testtask.view.MainUI</param-value>
         </init-param>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>Main servlet</servlet-name>
         <url-pattern>/*</url-pattern>

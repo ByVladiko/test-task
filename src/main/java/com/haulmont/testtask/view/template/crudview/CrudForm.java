@@ -58,8 +58,8 @@ public class CrudForm<T> extends Window {
         crudViewLayout.createFieldsForForm(binder).forEach(component -> formLayout.addComponent(component));
 
         HorizontalLayout buttonsLayout = new HorizontalLayout(saveButton);
-        formLayout.addComponent(buttonsLayout);
         configureButtons();
+        formLayout.addComponent(buttonsLayout);
 
         formLayout.setMargin(true);
         setContent(formLayout);
