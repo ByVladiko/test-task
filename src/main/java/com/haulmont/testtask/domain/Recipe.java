@@ -1,8 +1,9 @@
 package com.haulmont.testtask.domain;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +13,7 @@ public class Recipe {
     @Id
     @GeneratedValue
     private Long id;
+    @Type(type="text")
     private String description;
     @ManyToOne
     private Patient patient;

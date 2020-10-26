@@ -26,7 +26,6 @@ public class MainUI extends UI {
     private void setup() {
         setupContentLayout();
         addNavigation();
-        setWelcomeLayout();
     }
 
     private void setupContentLayout() {
@@ -43,7 +42,7 @@ public class MainUI extends UI {
         Button doctorLink = new Button("Doctors");
         doctorLink.addClickListener(event -> {
             DoctorRepositoryImpl repository = new DoctorRepositoryImpl();
-            Layout layout = new DoctorLayout(repository).getContent();
+            Layout layout = new DoctorLayout(repository);
             setContentLayout(layout);
         });
         navigation.addComponent(doctorLink);
@@ -51,7 +50,7 @@ public class MainUI extends UI {
         Button patientLink = new Button("Patients");
         patientLink.addClickListener(event -> {
             PatientRepository repository = new PatientRepositoryImpl();
-            Layout layout = new PatientLayout(repository).getContent();
+            Layout layout = new PatientLayout(repository);
             setContentLayout(layout);
         });
         navigation.addComponent(patientLink);
@@ -59,7 +58,7 @@ public class MainUI extends UI {
         Button recipeLink = new Button("Recipes");
         recipeLink.addClickListener(event -> {
             RecipeRepository repository = new RecipeRepositoryImpl();
-            Layout layout = new RecipeLayout(repository).getContent();
+            Layout layout = new RecipeLayout(repository);
             setContentLayout(layout);
         });
         navigation.addComponent(recipeLink);
@@ -70,10 +69,5 @@ public class MainUI extends UI {
     private void setContentLayout(Layout layout) {
         main.replaceComponent(contentLayout, layout);
         contentLayout = layout;
-    }
-
-    private void setWelcomeLayout() {
-        Label welcomeLabel = new Label("Welcome!");
-        contentLayout.addComponent(welcomeLabel);
     }
 }

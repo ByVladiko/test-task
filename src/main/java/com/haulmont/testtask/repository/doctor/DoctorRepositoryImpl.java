@@ -4,9 +4,12 @@ import com.haulmont.testtask.domain.Doctor;
 import com.haulmont.testtask.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import javax.persistence.TypedQuery;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DoctorRepositoryImpl implements DoctorRepository {
 
@@ -58,5 +61,32 @@ public class DoctorRepositoryImpl implements DoctorRepository {
         session.getTransaction().commit();
         session.close();
         return doctors;
+    }
+
+    @Override
+    public Map<Doctor, Long> getStatistic() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        String hqlText =
+                "SELECT doc, count(rec) " +
+                "from Doctor doc " +
+                        "left join Recipe rec " +
+                        "on rec.doctor.id = doc.id " +
+                        "GROUP BY(doc)";
+
+        Query query = session.createQuery(hqlText);
+        List<Object[]> resultList = query.list();
+
+        Map<Doctor, Long> result = new HashMap<>();
+
+        for (Object[] element : resultList) {
+            result.put((Doctor) element[0], (Long) element[1]);
+        }
+        
+        session.getTransaction().commit();
+        session.close();
+
+        return result;
     }
 }

@@ -20,7 +20,7 @@ public class CrudTable<T> extends Grid<T> {
         updateTable();
     }
 
-    protected void updateTable() {
+    public void updateTable() {
         CrudRepository<T> repository = crudViewLayout.getRepository();
         List<T> list = repository.getAll();
         this.setItems(list);

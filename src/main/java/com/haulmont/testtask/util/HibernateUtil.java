@@ -22,24 +22,30 @@ public class HibernateUtil {
 
     private synchronized static void setUp() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure()
+                .configure("hibernate.cfg.xml")
                 .build();
         try {
             sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 
-            DoctorRepository doctorRepository = new DoctorRepositoryImpl();
-            Doctor doctor = new Doctor("Nicolaus", "Fabiulos", "Serbian", "Traumatolog");
-            doctorRepository.save(doctor);
-            doctorRepository.save(new Doctor("Galileo", "Galilei", "Shelter", "Stomatolog"));
-            doctorRepository.save(new Doctor("Johannes", "Kepler", "Tailer", "Pediator"));
-
-            PatientRepository patientRepository = new PatientRepositoryImpl();
-            Patient patient = new Patient("Krambi", "Kreker", "Sugarovich", "+79277209637");
-            patientRepository.save(patient);
-
-            RecipeRepository recipeRepository = new RecipeRepositoryImpl();
-            Recipe recipe = new Recipe("Dont forget about your soul", patient, doctor, LocalDate.of(2020, 3, 25), Priority.Default);
-            recipeRepository.save(recipe);
+//            DoctorRepository doctorRepository = new DoctorRepositoryImpl();
+//            Doctor doctor = new Doctor("Nicolaus", "Fabiulos", "Serbian", "Traumatolog");
+//            doctorRepository.save(doctor);
+//            doctorRepository.save(new Doctor("Galileo", "Galilei", "Shelter", "Stomatolog"));
+//            doctorRepository.save(new Doctor("Johannes", "Kepler", "Tailer", "Pediator"));
+//
+//            PatientRepository patientRepository = new PatientRepositoryImpl();
+//            Patient patient1 = new Patient("Krambi", "Kreker", "Sugarovich", "+79277209637");
+//            patientRepository.save(patient1);
+//            Patient patient2 = new Patient("Selvestor", "Sharm", "Fisical", "+7934555555");
+//            patientRepository.save(patient2);
+//
+//            RecipeRepository recipeRepository = new RecipeRepositoryImpl();
+//            Recipe recipe = new Recipe("Dont forget about your soul", patient1, doctor, LocalDate.of(2020, 3, 25), Priority.Default);
+//            recipeRepository.save(recipe);
+//            Recipe recipe1 = new Recipe("Come out", patient1, doctor, LocalDate.of(2020, 3, 25), Priority.Default);
+//            recipeRepository.save(recipe1);
+//            Recipe recipe2 = new Recipe("Wake up early", patient1, doctor, LocalDate.of(2020, 3, 25), Priority.Default);
+//            recipeRepository.save(recipe2);
         }
         catch (Exception e) {
             StandardServiceRegistryBuilder.destroy(registry);

@@ -1,0 +1,35 @@
+INSERT INTO patient (first_name, last_name, patronymic, phone)
+VALUES ('Rose', 'Norman', 'Bell', '+74605341540'),
+       ('Chancellor', 'Dominic', 'Craig', '+76501002604'),
+       ('Gary', 'Cole', 'Yael', '+72121782019'),
+       ('Herrod', 'Kadeem', 'Dalton', '+73293238158'),
+       ('Alexa', 'Daryl', 'Sacha', '+76318850189'),
+       ('Zeph', 'Guy', 'Solomon', '+71735546851'),
+       ('Fay', 'Hedley', 'Nora', '+78672560579'),
+       ('Kibo', 'Grant', 'Maris', '+79769175733'),
+       ('Bradley', 'Astra', 'Merrill', '+72359515388'),
+       ('Otto', 'Hanna', 'Mercedes', '+71657972903');
+
+INSERT INTO doctor (first_name, last_name, patronymic, specialization)
+VALUES ('Harding', 'Carissa', 'Shana', 'Gynecologist'),
+       ('Jaime', 'Mariam', 'Dominic', 'Urologist'),
+       ('Rigel', 'Quincy', 'Maggy', 'Dentist'),
+       ('Keely', 'Carl', 'TaShya', 'Lore'),
+       ('Phoebe', 'Beck', 'Harrison', 'Traumatologist'),
+       ('Rogan', 'Paula', 'Hollee', 'Surgeon'),
+       ('Charles', 'Colton', 'Halla', 'Dermatologist'),
+       ('Hamilton', 'Chaim', 'Upton', 'Ocular'),
+       ('Ayanna', 'Erasmus', 'Fulton', 'Psychologist'),
+       ('Carl', 'Indira', 'Nathaniel', 'Pediatrician');
+
+INSERT INTO prescriptions (description, patient_id, doctor_id, created, validity, priority_id)
+VALUES ('nascetur ridiculus', 1, 1, '2021/01/03', '2021/03/04', 1),
+       ('cursus et, magna. Praesent interdum ligula eu enim.', 2, 2, '2020/02/04', '2020/02/10', 2),
+       ('sapien imperdiet ornare.', 3, 3, '2020/03/08', '2020/03/12', 3),
+       ('tellus justo sit amet nulla. Donec non justo. Proin non', 4, 4, '2020/10/04', '2020/10/07', 4),
+       ('lectus pede, ultrices', 5, 5, '2020/04/04', '2021/04/30', 5),
+       ('imperdiet nec, leo. Morbi', 6, 6, '2020/06/11', '2020/06/14', 6),
+       ('venenatis', 7, 7, '2020/08/27', '2020/08/28', 7),
+       ('eu lacus. Quisque imperdiet,', 8, 8, '2020/04/10', '2020/12/06', 8),
+       ('arcu. Morbi sit amet', 9, 9, '2020/04/19', '2020/04/20', 9),
+       ('sociis natoque penatibus et magnis', 10, 10, '2020/08/20', '2020/12/14', 10);
