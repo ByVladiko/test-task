@@ -6,10 +6,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DoctorRepositoryImpl implements DoctorRepository {
 
@@ -70,20 +72,16 @@ public class DoctorRepositoryImpl implements DoctorRepository {
 
         String hqlText =
                 "SELECT doc, count(rec) " +
-                "from Doctor doc " +
+                        "from Doctor doc " +
                         "left join Recipe rec " +
                         "on rec.doctor.id = doc.id " +
                         "GROUP BY(doc)";
 
-        Query query = session.createQuery(hqlText);
-        List<Object[]> resultList = query.list();
+        Map<Doctor, Long> result = session
+                .createQuery(hqlText, Tuple.class)
+                .getResultStream()
+                .collect(Collectors.toMap(row -> (Doctor) row.get(0), row -> (Long) row.get(1)));
 
-        Map<Doctor, Long> result = new HashMap<>();
-
-        for (Object[] element : resultList) {
-            result.put((Doctor) element[0], (Long) element[1]);
-        }
-        
         session.getTransaction().commit();
         session.close();
 

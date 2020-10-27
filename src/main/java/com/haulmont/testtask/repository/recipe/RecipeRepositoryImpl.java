@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeRepositoryImpl implements RecipeRepository {
@@ -80,12 +81,14 @@ public class RecipeRepositoryImpl implements RecipeRepository {
         Root<Recipe> root = query.from(Recipe.class);
 
         query.select(root);
-        if(patient != null) query.where(builder.equal(root.get("patient"), patient));
-        if(priority != null) query.where(builder.equal(root.get("priority"), priority));
-        if(!description.isEmpty()) {
-            query.where(builder.like(builder.lower(root.get("description")),
-                    builder.lower(builder.literal("%"+ description +"%"))));
-        }
+
+        List<Predicate> predicateList = new ArrayList<>();
+        if(patient != null) predicateList.add(builder.equal(root.get("patient"), patient));
+        if(priority != null) predicateList.add(builder.equal(root.get("priority"), priority));
+        if(!description.isEmpty()) predicateList.add(builder.like(builder.lower(root.get("description")),
+                builder.lower(builder.literal("%"+ description +"%"))));
+
+        query.where(predicateList.toArray(new Predicate[0]));
 
         List<Recipe> recipes = session.createQuery(query).getResultList();
 
